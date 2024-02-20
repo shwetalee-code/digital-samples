@@ -123,11 +123,11 @@ def postCatProcessing(spark, catOutput, kafkaBootstrapServers, kafkaOutput Topic
         .withColumn("value", regexp_replace('value', '\}\"', '}'))
         
         # Push data to output kafka topic
-        outputDf.select("key","value") \ 
-            .write \ 
+        outputDf.select("key","value")\ 
+            .write\ 
             .format("kafka")
-            .option("kafka.bootstrap.servers", kafkaBootstrapServers) \
-            .option("topic", kafkaOutputTopic) \
+            .option("kafka.bootstrap.servers", kafkaBootstrapServers)\
+            .option("topic", kafkaOutputTopic)\
             .save()
             
         print("{0} # Data Written to Kafka Topic. ".format(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
@@ -196,8 +196,8 @@ def main():
         ASchema, CSchema, BSchema = getSchema()
         
         # Define Kafka broker, input topic, schema and output topic
-        kafkaInputTopic, schema, kafkaOutputTopic, consumerGroupId = (A_input_kafka_topic, ASchema, A_output_kafka_topic, A_consumer_group_id) if fType=='A' \ 
-            else (C_input_kafka_topic, CSchema, C_output_kafka_topic, C_consumer_group_id) if fType=='C' \
+        kafkaInputTopic, schema, kafkaOutputTopic, consumerGroupId = (A_input_kafka_topic, ASchema, A_output_kafka_topic, A_consumer_group_id) if fType=='A'\ 
+            else (C_input_kafka_topic, CSchema, C_output_kafka_topic, C_consumer_group_id) if fType=='C'\
             else (B_input_kafka_topic, BSchema, B_output_kafka_topic, B_consumer_group_id)
             
         # Spark Session Initiation
@@ -210,8 +210,8 @@ def main():
         postProcessingDf = preProcessing(spark, kafkaBootstrapServers, kafkaInputTopic, fType, schema, consumerGroupId)
         
         # Convert realtime stream into micro-batch
-        postProcessingDf.writeStream \
-        .outputMode("append") \ 
+        postProcessingDf.writeStream\
+        .outputMode("append")\ 
         .foreachBatch(lambda df, epochId: batchProcessing(df, epochId, kafkaBootstrapServers, kafkaOutputTopic, fType)) \ 
         .start() \
         .awaitTermination()
