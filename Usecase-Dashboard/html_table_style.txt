@@ -1,0 +1,26 @@
+<head>
+<style>
+table, th, td {
+border; 1px solid black;
+border-collapse: collapse;
+text-align: center;
+}
+
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+        $('#mytable td.y_n').each(function(){
+            if ($(this).text() == 'OK') {
+                $(this).css('background-color','#9FE2BF');
+            }
+            else if ($(this).text() == 'DLT') {
+                $(this).css('background-color','#FFBF00');
+            }
+            else if ($(this).text() == 'DBA' || $(this).text() == 'FIN' || $(this).text() == 'PRX' || $(this).text() == 'SFD' || $(this).text() == 'CBS' || $(this).text() == 'PRM' || $(this).text() == 'SRC' || $(this).text() == 'TGT') {
+                $(this).css('background-color','#FFFF00');
+            }
+        });
+});
+</script>
+</head>
