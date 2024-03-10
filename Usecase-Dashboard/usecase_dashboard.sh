@@ -81,7 +81,7 @@ do
 	NFCNT_MTD_tmp=`cat $homepath/combined_output_wo_MTD.txt | head -$i | tail -1 | awk -F "," '{print NF}'` 
 	#NFCNT_blank_tmp=`cat $homepath/combined_output_wo_MTD.txt | head -$i | tail -1 | grep -o YES | wc -l`
 	#NFCNT_MTD=`echo $(($NFCNT_MTD_tmp-4))`
-	NFCNT_MTD=`cat $homepath/combined_output_wo_MTD.txt | head -$i | tail -1 | grep -iwoe OK -iwoe DBA -iwoe DLT -iwoe FIN -iwoe PRX -iwoe CBS -iwoe PRM -iwoe SRC -iwoe TGT | wc -l`
+	NFCNT_MTD=`cat $homepath/combined_output_wo_MTD.txt | head -$i | tail -1 | grep -iwoe OK -iwoe DBA -iwoe DLT -iwoe FIN -iwoe PRX -iwoe SFD -iwoe CBS -iwoe PRM -iwoe SRC -iwoe TGT | wc -l`
 	MTDDLline_final=`echo $(($NFCNT_MTD-$MTDDLline))`
 	percentValue=100
 	MTD_calculated=`echo $(($MTDline*$percentValue))`

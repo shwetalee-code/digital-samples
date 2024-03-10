@@ -1,0 +1,2 @@
+homepath=/home/unix/ops/USECASE_SUMMARY
+echo "<table id="mytable">" ; while read INPUT ; do echo "<tr><td class="y_n">${INPUT//,/</td><td class="y_n">}</td></tr?" ; done < $homepath/raw_data_publish.txt ; echo "</table>"
